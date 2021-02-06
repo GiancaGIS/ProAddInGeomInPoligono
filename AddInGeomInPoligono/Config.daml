@@ -1,0 +1,46 @@
+﻿<ArcGIS defaultAssembly="AddInGeomInPoligono.dll" defaultNamespace="AddInGeomInPoligono" xmlns="http://schemas.esri.com/DADF/Registry" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schemas.esri.com/DADF/Registry file:///C:/Program%20Files/ArcGIS/Pro/bin/ArcGIS.Desktop.Framework.xsd">
+  <AddInInfo id="{15c7c796-79bc-424a-9ae6-fdab23a7ce79}" version="1.1" desktopVersion="2.5.22081">
+    <Name>AddInGeomInPoligono</Name>
+    <Description>AddInGeomInPoligono description</Description>
+    <Image>Images\AddinDesktop32.png</Image>
+    <Author>GiancaGIS</Author>
+    <Company>GiancaGIS</Company>
+    <Date>12/12/2020</Date>
+    <Subject>Framework</Subject>
+    <!-- Note subject can be one or more of these topics:
+                    Content, Framework, Editing, Geodatabase, Geometry, Geoprocessing, Layouts, Map Authoring, Map Exploration -->
+  </AddInInfo>
+  <modules>
+    <insertModule id="AddInGeomInPoligono_Module" className="Module1" autoLoad="false" caption="Module1">
+      <!-- uncomment to have the control hosted on a separate tab-->
+      <tabs>
+        <!--<tab id="AddInGeomInPoligono_Tab1" caption="New Tab">
+          <group refID="AddInGeomInPoligono_Group1"/>
+        </tab>-->
+      </tabs>
+      <groups>
+        <!-- comment this out if you have no controls on the Addin tab to avoid
+              an empty group-->
+        <group id="AddInGeomInPoligono_Group1" caption="Geometrie In Poligono" appearsOnAddInTab="true">
+          <!-- host controls within groups -->
+          <button refID="AddInGeomInPoligono_DockpaneGeomInPoligono_ShowButton" size="middle" />
+          <tool refID="AddInGeomInPoligono_ToolSelezPoligono" size="large"/>
+        </group>
+      </groups>
+      <controls>
+        <tool id="AddInGeomInPoligono_ToolSelezPoligono" caption="Seleziona Poligono" className="ToolSelezPoligono" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonRed32.png" condition="esri_mapping_mapPane">
+          <tooltip heading="Clicca per selezionare il poligono in mappa">Cliccando si ricavano informazioni sulle geometrie che ricadono nel poligono selezionato in mappa<disabledText /></tooltip>
+        </tool>
+        <!-- add your controls here -->
+        <button id="AddInGeomInPoligono_DockpaneGeomInPoligono_ShowButton" caption="Apri Dockpane" className="DockpaneGeomInPoligono_ShowButton" loadOnClick="true" smallImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple16.png" largeImage="pack://application:,,,/ArcGIS.Desktop.Resources;component/Images/GenericButtonPurple32.png">
+          <tooltip heading="Apri Dockpane">Cliccare per aprire la dockpane del AddIn<disabledText /></tooltip>
+        </button>
+      </controls>
+      <dockPanes>
+        <dockPane id="AddInGeomInPoligono_DockpaneGeomInPoligono" caption="DockpaneGeomInPoligono" className="DockpaneGeomInPoligonoViewModel" dock="right" dockWith="esri_core_projectDockPane">
+          <content className="DockpaneGeomInPoligonoView" />
+        </dockPane>
+      </dockPanes>
+    </insertModule>
+  </modules>
+</ArcGIS>
