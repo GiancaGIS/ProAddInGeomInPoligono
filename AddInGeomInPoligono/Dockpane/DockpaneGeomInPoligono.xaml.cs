@@ -145,7 +145,7 @@ namespace AddInGeomInPoligono
 
         private void PuliscoAggiornoComboboxLayer()
         {
-            FrameworkApplication.Current.Dispatcher.Invoke(() =>
+            Application.Current.Dispatcher.Invoke(() =>
            {
                this.comboBoxLayerPoligonali.Items.Clear();
            });
@@ -154,7 +154,7 @@ namespace AddInGeomInPoligono
             {
                 dizFLayerInTOC.Clear();
 
-                var listaLayers = this.MappaCorrente.Layers.OfType<FeatureLayer>().ToList();
+                List<FeatureLayer> listaLayers = this.MappaCorrente.Layers.OfType<FeatureLayer>().ToList();
 
                 if (listaLayers.Count > 0)
                 {
@@ -162,10 +162,10 @@ namespace AddInGeomInPoligono
 
                     foreach (FeatureLayer featureLayer in listaLayers)
                     {
-                        var shapeType = featureLayer.ShapeType;
+                        ArcGIS.Core.CIM.esriGeometryType shapeType = featureLayer.ShapeType;
                         if (shapeType == ArcGIS.Core.CIM.esriGeometryType.esriGeometryPolygon)
                         {
-                            FrameworkApplication.Current.Dispatcher.Invoke(() =>
+                            Application.Current.Dispatcher.Invoke(() =>
                           {
                               this.comboBoxLayerPoligonali.Items.Add(featureLayer.Name);
                           });
@@ -173,7 +173,7 @@ namespace AddInGeomInPoligono
                             idxProgressivo++;
                         }
                     }
-                    FrameworkApplication.Current.Dispatcher.Invoke(() =>
+                    Application.Current.Dispatcher.Invoke(() =>
                     {
                         this.comboBoxLayerPoligonali.Items.Refresh();
                     });
