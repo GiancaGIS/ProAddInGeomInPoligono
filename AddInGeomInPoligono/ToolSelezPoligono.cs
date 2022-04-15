@@ -98,25 +98,25 @@ namespace AddInGeomInPoligono
                                 ListaInfoSuFeature.Add($@"{featureLayer.Name}, # geometrie:  {numOggetti}");
                             }
 
-                            QueuedTask.Run(() =>
-                            {
-                                Notification notification = new Notification
-                                {
-                                    Title = "GiancaGIS",
-                                    Message = "Analisi spaziale effettuata!"
-                                };
+                            _ = QueuedTask.Run(() =>
+                              {
+                                  Notification notification = new Notification
+                                  {
+                                      Title = "GiancaGIS",
+                                      Message = "Analisi spaziale effettuata!"
+                                  };
                                 //notification.ImageUrl =
                                 //@"pack://application:,,,/AddInGeomInPoligono;component/Images/Profilo.png";
 
                                 FrameworkApplication.AddNotification(notification);
 
-                                Module1.DockpaneGeomInPoligonoViewModel.EliminaListaFeature();
+                                  Module1.DockpaneGeomInPoligonoViewModel.EliminaListaFeature();
 
-                                foreach (string info in ListaInfoSuFeature)
-                                {
-                                    Module1.DockpaneGeomInPoligonoViewModel.AggiungiListaFeature(info);
-                                };
-                            });
+                                  foreach (string info in ListaInfoSuFeature)
+                                  {
+                                      Module1.DockpaneGeomInPoligonoViewModel.AggiungiListaFeature(info);
+                                  };
+                              });
                         });
                     }
                 }
