@@ -11,8 +11,6 @@ namespace AddInGeomInPoligono
     {
         private const string _dockPaneID = "AddInGeomInPoligono_DockpaneGeomInPoligono";
 
-        private ObservableCollection<string> _listaDiFeature = new ObservableCollection<string>();
-
         /// <summary>
         /// used to lock collections for use by multiple threads
         /// </summary>
@@ -22,7 +20,7 @@ namespace AddInGeomInPoligono
         protected DockpaneGeomInPoligonoViewModel()
         {
             // Abilito il Binding tra i dati e la ListView!
-            BindingOperations.EnableCollectionSynchronization(_listaDiFeature, LockCollections);
+            BindingOperations.EnableCollectionSynchronization(ListaFeature, LockCollections);
             Module1.DockpaneGeomInPoligonoViewModel = this;
         }
 
@@ -45,28 +43,25 @@ namespace AddInGeomInPoligono
         /// </summary>
         internal void EliminaListaFeature()
         {
-            lock (_listaDiFeature)
+            lock (ListaFeature)
             {
-                ProApp.Current.Dispatcher.BeginInvoke(new Action(() =>
-                {
-                    ListaFeature.Clear();
-                }));
+                _ = System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+                  {
+                      ListaFeature.Clear();
+                  }));
             }
         }
 
-        public ObservableCollection<string> ListaFeature
-        {
-            get { return _listaDiFeature; }
-        }
+        public ObservableCollection<string> ListaFeature { get; } = new ObservableCollection<string>();
 
         /// <summary>
         /// Aggiorna la lista di Feature, direttamente sul Thread della GUI
         /// </summary>
         internal void AggiungiListaFeature(string addItem)
         {
-            lock (_listaDiFeature)
+            lock (ListaFeature)
             {
-                ProApp.Current.Dispatcher.BeginInvoke(new Action(() =>
+                System.Windows.Application.Current.Dispatcher.BeginInvoke(new Action(() =>
                 {
                     ListaFeature.Add(addItem);
                 }));
